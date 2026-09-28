@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: oncall-agent
+  ai:
+    dashscope:
+          api-key: ${DASHSCOPE_API_KEY:}  # 从环境变量读取或使用默认值
+          chat:
+            options:
+              timeout: 180000  # 超时时间180秒（3分钟）
+          retry:
+            max-attempts: 3  # 最大重试次数
+            backoff:
+              initial-interval: 2000  # 初始重试间隔2秒
+              multiplier: 2  # 重试间隔倍数
+              max-interval: 10000  # 最大重试间隔10秒
+
+server:
+  port: 9901
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+document:
+  chunk:
+    max-size: 800
+    overlap: 100
+file:
+  upload:
+    path: ./uploads
+    allowed-extensions: txt,md
+
+milvus:
+  host: localhost
+  port: 19530
+  username: ""
+  database: "default"
+  timeout: 10000
+
+dashscope:
+  api:
+   key: ${DASHSCOPE_API_KEY:}  # 从环境变量读取或使用默认值（用于自定义配置）
+  embedding:
+   model: qwen3.7-text-embedding-flash
+
+rag:
+  top-k: 3
+  model: "qwen3-30b-a3b-thinking-2507"
+
+  # Prometheus 配置
+prometheus:
+  base-url: http://localhost:9090
+  timeout: 10  # 超时时间（秒）
+  mock-enabled: true  # 是否启用 Mock 模式（用于测试）
+
+# CLS 云日志服务配置
+cls:
+  mock-enabled: true  # 是否启用 Mock 模式（用于测试，设为 true 返回与告警关联的模拟日志数据）
+
+# Spring AI Alibaba DashScope 配置
