@@ -31,3 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Local secrets and runtime/user data
+.env
+.env.*
+!.env.example
+application-local.yml
+application-*.local.yml
+uploads/
+logs/
+*.log
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks

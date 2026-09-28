@@ -3,7 +3,7 @@ spring:
     name: oncall-agent
   ai:
     dashscope:
-          api-key: ${DASHSCOPE_API_KEY:}  # 从环境变量读取或使用默认值
+          api-key: ${DASHSCOPE_API_KEY:}  # 从环境变量读取（未设置时为空）
           chat:
             options:
               timeout: 180000  # 超时时间180秒（3分钟）
@@ -39,7 +39,7 @@ milvus:
 
 dashscope:
   api:
-   key: ${DASHSCOPE_API_KEY:}  # 从环境变量读取或使用默认值（用于自定义配置）
+   key: ${DASHSCOPE_API_KEY:}  # 从环境变量读取（未设置时为空），用于自定义配置
   embedding:
    model: qwen3.7-text-embedding-flash
 
@@ -47,7 +47,7 @@ rag:
   top-k: 3
   model: "qwen3-30b-a3b-thinking-2507"
 
-  # Prometheus 配置
+# Prometheus 配置
 prometheus:
   base-url: http://localhost:9090
   timeout: 10  # 超时时间（秒）
